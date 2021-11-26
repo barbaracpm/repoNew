@@ -7,7 +7,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.formacionjava.springboot.apirest.models.dao.ClienteDao;
 import com.formacionjava.springboot.apirest.models.entity.Cliente;
+import com.formacionjava.springboot.apirest.models.entity.Region;
 
+//los métodos del implement siempre deben llevar @Transactional
 @Service
 public class ClienteImpl implements ClienteService {
 	
@@ -40,6 +42,14 @@ public class ClienteImpl implements ClienteService {
 	@Transactional
 	public void delete(Long id) {
 		clienteDao.deleteById(id);
+	}
+
+	@Override
+	//indicamos que la transacción es un get (solo de lectura)
+	@Transactional(readOnly = true)
+	public List<Region> findAllRegions() {
+		// TODO Auto-generated method stub
+		return clienteDao.findAllRegions();
 	}
 	
 	
